@@ -40,8 +40,10 @@
   
   https://github.com/olikraus/u8g2/issues/2436
   
-    No Hardware Flip
-    No U8x8 Support
+   This driver will use "u8g2_ll_hvline_horizontal_right_lsb"
+    --> No Hardware Flip
+    --> No U8x8 Support
+    
 
 */
 
@@ -249,7 +251,6 @@ static const uint8_t u8x8_d_st7305_122x250_init_seq[] = {
 };
 
 
-
 static const u8x8_display_info_t u8x8_st7305_122x250_display_info =
 {
   /* chip_enable_level = */ 0,
@@ -268,7 +269,7 @@ static const u8x8_display_info_t u8x8_st7305_122x250_display_info =
   /* write_pulse_width_ns = */ 70,	
   /* tile_width = */ 16,
   /* tile_height = */ 32,
-  /* default_x_offset = */ 0,
+  /* default_x_offset = */ 0,           /* not used: x offset is hard coded into cmd sequence */
   /* flipmode_x_offset = */ 0,
   /* pixel_width = */ 122,
   /* pixel_height = */ 250
@@ -276,7 +277,7 @@ static const u8x8_display_info_t u8x8_st7305_122x250_display_info =
 
 uint8_t u8x8_d_st7305_122x250(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
 {
-  uint16_t x;
+  // uint16_t x;
   uint8_t c, i, y;
   uint8_t *ptr;
   switch(msg)
@@ -316,9 +317,10 @@ uint8_t u8x8_d_st7305_122x250(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *
       break;
 #endif
     case U8X8_MSG_DISPLAY_DRAW_TILE:
-      x = ((u8x8_tile_t *)arg_ptr)->x_pos;    
-      x *= 8;
-      x += u8x8->x_offset;
+      // x offset is ignored 
+      //x = ((u8x8_tile_t *)arg_ptr)->x_pos;    
+      //x *= 8;
+      //x += u8x8->x_offset;
       y= (((u8x8_tile_t *)arg_ptr)->y_pos);
       y*=4;
     
@@ -384,7 +386,7 @@ static const u8x8_display_info_t u8x8_st7305_200x200_display_info =
   /* write_pulse_width_ns = */ 70,	
   /* tile_width = */ 26,   /* tile width is 26*8=208, because this display requires 12 bit blocks, which would be 204 pixel, so next tile is at 208 */
   /* tile_height = */ 25,
-  /* default_x_offset = */ 0,
+  /* default_x_offset = */ 0,                   /* not used: x offset is hard coded into cmd sequence */
   /* flipmode_x_offset = */ 0,
   /* pixel_width = */ 200,              /* not 100% sure, whether this works with the tile_width of 26... */
   /* pixel_height = */ 200
@@ -392,7 +394,7 @@ static const u8x8_display_info_t u8x8_st7305_200x200_display_info =
 
 uint8_t u8x8_d_st7305_200x200(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
 {
-  uint16_t x;
+  //uint16_t x;
   uint8_t c, i, y;
   uint8_t *ptr;
   switch(msg)
@@ -432,9 +434,9 @@ uint8_t u8x8_d_st7305_200x200(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *
       break;
 #endif
     case U8X8_MSG_DISPLAY_DRAW_TILE:
-      x = ((u8x8_tile_t *)arg_ptr)->x_pos;    
-      x *= 8;
-      x += u8x8->x_offset;
+      //x = ((u8x8_tile_t *)arg_ptr)->x_pos;    
+      //x *= 8;
+      //x += u8x8->x_offset;
       y= (((u8x8_tile_t *)arg_ptr)->y_pos);
       y*=4;
     
@@ -598,7 +600,7 @@ static const u8x8_display_info_t u8x8_st7305_168x384_display_info =
         /* write_pulse_width_ns = */ 70,
         /* tile_width = */ 21, /* tile width is 21*8=168, because this display requires 12 bit blocks, which would be 168 pixel, so next tile is at 168 */
         /* tile_height = */ 48,
-        /* default_x_offset = */ 0,
+        /* default_x_offset = */ 0,             /* not used: x offset is hard coded into cmd sequence */
         /* flipmode_x_offset = */ 0,
         /* pixel_width = */ 168, /* not 100% sure, whether this works with the tile_width of 21... */
         /* pixel_height = */ 384};
@@ -606,7 +608,7 @@ static const u8x8_display_info_t u8x8_st7305_168x384_display_info =
 
 uint8_t u8x8_d_st7305_168x384(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
 {
-  uint16_t x;
+  //uint16_t x;
   uint8_t c, i, y;
   uint8_t *ptr;
   switch(msg)
@@ -646,9 +648,9 @@ uint8_t u8x8_d_st7305_168x384(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *
       break;
 #endif
     case U8X8_MSG_DISPLAY_DRAW_TILE:
-      x = ((u8x8_tile_t *)arg_ptr)->x_pos;    
-      x *= 8;
-      x += u8x8->x_offset;
+      // x = ((u8x8_tile_t *)arg_ptr)->x_pos;    
+      // x *= 8;
+      // x += u8x8->x_offset;
       y= (((u8x8_tile_t *)arg_ptr)->y_pos);
       y*=4;
     
