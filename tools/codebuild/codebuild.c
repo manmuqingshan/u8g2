@@ -1798,6 +1798,15 @@ struct controller controller_list[] =
   },
   
   {
+    "st7305", 		38, 	50, 	"u8g2_ll_hvline_horizontal_right_lsb", "u8x8_cad_011", "", COM_4WSPI|COM_3WSPI|COM_6800|COM_8080,
+    "", /* is_generate_u8g2_class= */ 1,
+    {
+      { "300X400" },    /* https://github.com/olikraus/u8g2/issues/2702 */
+      { NULL }
+    },
+  },
+  
+  {
     "st7586s", 		48, 	17, 	"u8g2_ll_hvline_horizontal_right_lsb", "u8x8_cad_011", "", COM_4WSPI,
     "", /* is_generate_u8g2_class= */ 1,
     {
